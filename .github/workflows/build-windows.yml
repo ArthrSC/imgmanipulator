@@ -6,9 +6,10 @@ permissions:
 on:
   push:
     branches: [ main ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:   # permite rodar manualmente pelo botão "Run workflow"
+  workflow_dispatch:
 
 jobs:
   build-windows:
@@ -21,7 +22,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.x'   # ajuste se você usa outra versão
+          flutter-version: '3.x'
           channel: 'stable'
           cache: true
 
@@ -34,9 +35,21 @@ jobs:
       - name: Build Windows release
         run: flutter build windows --release
 
-      - name: Upload Windows artifact
+      - name: Empacotar em ZIP
+        run: |
+          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath imgmanipulator-windows.zip
+        shell: pwsh
+
+      - name: Upload artifact (sempre)
         uses: actions/upload-artifact@v4
         with:
           name: imgmanipulator-windows
-          path: build/windows/x64/runner/Release/
+          path: imgmanipulator-windows.zip
           if-no-files-found: error
+
+      - name: Publicar Release (só em tags)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: imgmanipulator-windows.zip
+          generate_release_notes: true
