@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch:   # permite rodar manualmente pelo botão "Run workflow"
 
 jobs:
   build-windows:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
+          flutter-version: '3.x'   # ajuste se você usa outra versão
           channel: 'stable'
           cache: true
 
