@@ -1,0 +1,21 @@
+name: imgmanipulator
+description: Aplicação interativa de Processamento de Imagens (pontuais, geométricas e vizinhança) em Flutter.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  image: ^4.2.0          # apenas decodificar/codificar JPG/PNG (as operações são manuais)
+  file_picker: ^8.1.2    # abrir / salvar arquivos
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
