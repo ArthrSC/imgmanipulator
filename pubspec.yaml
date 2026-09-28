@@ -9,8 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image: ^4.2.0          # apenas decodificar/codificar JPG/PNG (as operações são manuais)
-  file_picker: ^8.1.2    # abrir / salvar arquivos
+  image: ^4.2.0
+  file_picker: ^10.3.7
 
 dev_dependencies:
   flutter_test:
